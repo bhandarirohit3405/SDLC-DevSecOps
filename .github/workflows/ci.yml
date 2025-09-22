@@ -23,8 +23,10 @@ jobs:
           pip install -r app/requirements.txt
 
       - name: Run unit tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: |
-          pytest tests/
+          python -m pytest -q tests/
 
       - name: Run Bandit security scan
         run: |

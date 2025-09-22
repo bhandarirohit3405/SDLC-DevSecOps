@@ -1,5 +1,5 @@
 import json
-from app import app
+from app.app import app  # note: import from the package/module path
 
 def test_index():
     client = app.test_client()
@@ -12,4 +12,5 @@ def test_greet():
     client = app.test_client()
     response = client.get("/greet?name=Atul")
     data = json.loads(response.data)
-    assert "Hello, Atul" in data["greeting"]
+    assert response.status_code == 200
+    assert data["greeting"].startswith("Hello, Atul")
